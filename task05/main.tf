@@ -13,17 +13,8 @@ module "app_service_plans" {
 module "windows_apps" {
   source = "./modules/app_service"
 
-  windows_apps = var.windows_apps
-  ip_restriction = {
-    allow_ip = {
-      name    = "allow-ip"
-      address = var.verification_agent_ip
-    }
-    allow_tm = {
-      name        = "allow-tm"
-      service_tag = "AzureTrafficManager"
-    }
-  }
+  windows_apps    = var.windows_apps
+  ip_restrictions = var.ip_restrictions # Correctly passing the variable to the module
 }
 
 module "traffic_manager" {
