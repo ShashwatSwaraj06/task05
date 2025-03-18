@@ -97,6 +97,8 @@ traffic_manager_endpoints = {
   }
 }
 
+verification_agent_ip = "18.153.146.156"
+
 ip_restrictions = [
   {
     name        = "allow-ip"

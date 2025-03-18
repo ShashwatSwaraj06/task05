@@ -13,8 +13,8 @@ module "app_service_plans" {
 module "windows_apps" {
   source = "./modules/app_service"
 
-  windows_apps    = var.windows_apps
-  ip_restrictions = var.ip_restrictions # Correctly passing the variable to the module
+  windows_apps     = var.windows_apps
+  ip_restrictions  = var.ip_restrictions # Correctly passing the variable to the module
 }
 
 module "traffic_manager" {

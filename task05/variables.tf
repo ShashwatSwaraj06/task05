@@ -59,3 +59,13 @@ variable "verification_agent_ip" {
   type        = string
   description = "The IP address of the verification agent used to test access restrictions for the app services."
 }
+
+variable "ip_restrictions" {
+  type = list(object({
+    name        = string
+    ip_address  = string
+    service_tag = string
+    priority    = number
+  }))
+  description = "List of IP restriction rules governing access to the app services, including IP addresses and service tags."
+}
