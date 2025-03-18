@@ -30,7 +30,7 @@ variable "windows_apps" {
     app_service_plan_id = string
     tags                = map(string)
   }))
-  description = "A map of Windows Web Apps. Each app includes name, resource group, location, service plan ID, and tags."
+  description = "A map of Windows Web Apps. Each app includes the app name, resource group, location, associated app service plan, and tags."
 }
 
 variable "traffic_manager_profile" {
@@ -43,7 +43,7 @@ variable "traffic_manager_profile" {
     relative_name  = string
     tags           = map(string)
   })
-  description = "Traffic Manager Profile properties including creation details, TTL, routing method, and tags."
+  description = "Traffic Manager Profile properties, including creation details, TTL, routing method, and tags."
 }
 
 variable "traffic_manager_endpoints" {
@@ -52,12 +52,12 @@ variable "traffic_manager_endpoints" {
     app_service_id = string
     location       = string
   }))
-  description = "Endpoints for the Traffic Manager, containing the endpoint name, service ID, and location."
+  description = "A map of endpoints for the Traffic Manager. Each endpoint includes a name, associated app ID, and location."
 }
 
 variable "verification_agent_ip" {
   type        = string
-  description = "The IP address of the verification agent used to test access restrictions for the app services."
+  description = "The IP address of the verification agent used to test access restrictions for the App Services."
 }
 
 variable "ip_restrictions" {
@@ -67,5 +67,5 @@ variable "ip_restrictions" {
     service_tag = string
     priority    = number
   }))
-  description = "List of IP restriction rules governing access to the app services, including IP addresses and service tags."
+  description = "A list of IP restrictions for App Services, including name, IP address, service tag, and priority."
 }
