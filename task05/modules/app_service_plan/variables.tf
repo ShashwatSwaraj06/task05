@@ -10,5 +10,5 @@ variable "app_service_plans" {
     })
     tags = map(string)
   }))
-  description = "A map of App Service Plans with properties such as name, location, worker size, etc."
+  description = "A map of App Service Plan configurations with details such as SKU and capacity."
 }

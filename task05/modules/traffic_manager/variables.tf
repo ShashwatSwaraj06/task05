@@ -8,7 +8,7 @@ variable "profile" {
     relative_name  = string
     tags           = map(string)
   })
-  description = "Traffic Manager Profile configurations such as name, routing method, and tags."
+  description = "Details of the Traffic Manager Profile, including routing methods, DNS settings, and tags."
 }
 
 variable "endpoints" {
@@ -17,5 +17,5 @@ variable "endpoints" {
     app_service_id = string
     location       = string
   }))
-  description = "Endpoints for Traffic Manager including name, resource ID, and location."
+  description = "Endpoints for the Traffic Manager managing app services across regions."
 }
