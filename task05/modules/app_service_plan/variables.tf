@@ -10,4 +10,5 @@ variable "app_service_plans" {
     })
     tags = map(string)
   }))
+  description = "A map of App Service Plans with properties such as name, location, worker size, etc."
 }

@@ -4,5 +4,5 @@ variable "resource_groups" {
     location = string
     tags     = map(string)
   }))
-  description = "Map of resource groups"
+  description = "A map of resource groups with their name, location, and tags."
 }

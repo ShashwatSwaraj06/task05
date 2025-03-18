@@ -98,3 +98,19 @@ traffic_manager_endpoints = {
 }
 
 verification_agent_ip = "18.153.146.156"
+
+
+ip_restrictions = [
+  {
+    name        = "allow-ip"
+    ip_address  = "18.153.146.156"
+    service_tag = null
+    priority    = 100
+  },
+  {
+    name        = "allow-tm"
+    ip_address  = null
+    service_tag = "AzureTrafficManager"
+    priority    = 200
+  }
+]
