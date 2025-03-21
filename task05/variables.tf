@@ -4,7 +4,7 @@ variable "resource_groups" {
     location = string
     tags     = map(string)
   }))
-  description = "A map of Resource Groups. Each group includes name, location, and associated tags."
+  description = "Defines the resource groups with name, location, and tags."
 }
 
 variable "app_service_plans" {
@@ -19,7 +19,7 @@ variable "app_service_plans" {
     })
     tags = map(string)
   }))
-  description = "A map of App Service Plans with properties such as name, location, SKU configuration, and associated tags."
+  description = "Defines the App Service Plans with name, location, SKU configuration, and associated tags."
 }
 
 variable "windows_apps" {
@@ -30,7 +30,7 @@ variable "windows_apps" {
     app_service_plan_id = string
     tags                = map(string)
   }))
-  description = "A map of Windows Web Apps with configurations including associated names, resource groups, locations, and service plans."
+  description = "Defines the Windows Web Apps with name, resource group, location, associated App Service Plan ID, and tags."
 }
 
 variable "traffic_manager_profile" {
@@ -43,7 +43,7 @@ variable "traffic_manager_profile" {
     relative_name  = string
     tags           = map(string)
   })
-  description = "Defines the Traffic Manager profile configuration, including its DNS name, TTL, and routing methods."
+  description = "Defines the Traffic Manager Profile properties with TTL, routing method, and tags."
 }
 
 variable "traffic_manager_endpoints" {
@@ -52,12 +52,12 @@ variable "traffic_manager_endpoints" {
     app_service_id = string
     location       = string
   }))
-  description = "A map of Traffic Manager endpoints, including names, IDs of linked services, and regional locations."
+  description = "Defines Traffic Manager endpoints with names, associated App Service IDs, and locations."
 }
 
 variable "verification_agent_ip" {
   type        = string
-  description = "The static IP address of the verification agent used to test access to App Services."
+  description = "The IP address of the verification agent used to test access restrictions on the Web Apps."
 }
 
 variable "ip_restrictions" {
@@ -67,5 +67,5 @@ variable "ip_restrictions" {
     service_tag = string
     priority    = number
   }))
-  description = "A list of rules to restrict access to Web Apps, including allowed IPs, Azure service tags, and their priorities."
+  description = "Defines the IP restrictions applied to Web Apps, including allowed IP addresses, Azure Service Tags, and their priorities."
 }
