@@ -19,7 +19,7 @@ variable "app_service_plans" {
     })
     tags = map(string)
   }))
-  description = "A map of App Service Plans with properties such as name, location, SKU configuration, capacity, and associated tags."
+  description = "A map of App Service Plans with properties such as name, location, SKU configuration, and associated tags."
 }
 
 variable "windows_apps" {
@@ -30,7 +30,7 @@ variable "windows_apps" {
     app_service_plan_id = string
     tags                = map(string)
   }))
-  description = "A map of Windows Web Apps, containing the app name, associated resource group, location, linked app service plan ID, and tags."
+  description = "A map of Windows Web Apps with configurations including associated names, resource groups, locations, and service plans."
 }
 
 variable "traffic_manager_profile" {
@@ -43,7 +43,7 @@ variable "traffic_manager_profile" {
     relative_name  = string
     tags           = map(string)
   })
-  description = "Traffic Manager Profile configuration, specifying the name, resource group, TTL, routing method, DNS name, and tags."
+  description = "Defines the Traffic Manager profile configuration, including its DNS name, TTL, and routing methods."
 }
 
 variable "traffic_manager_endpoints" {
@@ -52,12 +52,12 @@ variable "traffic_manager_endpoints" {
     app_service_id = string
     location       = string
   }))
-  description = "A map of Traffic Manager endpoints, with each entry including the endpoint name, associated app ID, and location."
+  description = "A map of Traffic Manager endpoints, including names, IDs of linked services, and regional locations."
 }
 
 variable "verification_agent_ip" {
   type        = string
-  description = "The IP address of the verification agent used to test access restrictions for the App Services."
+  description = "The static IP address of the verification agent used to test access to App Services."
 }
 
 variable "ip_restrictions" {
@@ -67,5 +67,5 @@ variable "ip_restrictions" {
     service_tag = string
     priority    = number
   }))
-  description = "A list of IP restrictions that define network restrictions for App Services, including IP address, service tag, and priority."
+  description = "A list of rules to restrict access to Web Apps, including allowed IPs, Azure service tags, and their priorities."
 }
