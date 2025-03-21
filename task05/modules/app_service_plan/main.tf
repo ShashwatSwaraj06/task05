@@ -1,14 +1,9 @@
-resource "azurerm_app_service_plan" "asp" {
-  for_each = var.app_service_plans
-
-  name                = each.value.name
-  location            = each.value.location
-  resource_group_name = each.value.resource_group
-  sku {
-    tier     = each.value.sku.tier
-    size     = each.value.sku.size
-    capacity = each.value.sku.capacity
-  }
-
-  tags = each.value.tags
+resource "azurerm_service_plan" "asp" {
+  name                = var.name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  os_type             = "Windows"
+  sku_name            = var.sku
+  worker_count        = var.worker_count
+  tags                = var.tags
 }

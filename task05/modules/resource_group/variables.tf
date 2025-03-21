@@ -1,8 +1,11 @@
-variable "resource_groups" {
-  type = map(object({
-    name     = string
-    location = string
-    tags     = map(string)
-  }))
-  description = "A map of resource groups containing their name, location, and tags."
+variable "name" {
+  type = string
+}
+
+variable "location" {
+  type = string
+}
+
+variable "tags" {
+  type = map(string)
 }
