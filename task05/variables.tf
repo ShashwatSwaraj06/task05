@@ -49,3 +49,13 @@ variable "tags" {
   type        = map(string)
   description = "Tags to apply to all resources."
 }
+
+variable "ip_restrictions" {
+  type = list(object({
+    name        = string
+    action      = string
+    ip_address  = optional(string)
+    service_tag = optional(string)
+  }))
+  description = "IP restriction rules for App Services"
+}
