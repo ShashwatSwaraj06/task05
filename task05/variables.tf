@@ -43,6 +43,7 @@ variable "traffic_manager_profile" {
     relative_name  = string
     tags           = map(string)
   })
+
   description = "Defines the Traffic Manager Profile properties with TTL, routing method, and tags."
 }
 
