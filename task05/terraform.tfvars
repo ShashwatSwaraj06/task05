@@ -46,6 +46,19 @@ traffic_manager_routing_method     = "Performance"
 traffic_manager_resource_group_key = "rg3"
 verification_agent_ip              = "18.153.146.156"
 
+ip_restrictions = [
+  {
+    action     = "Allow"
+    ip_address = "18.153.146.156"
+    name       = "allow-ip"
+  },
+  {
+    action      = "Allow"
+    service_tag = "AzureTrafficManager"
+    name        = "allow-tm"
+  }
+]
+
 tags = {
   Creator = "shashwat_swaraj@epam.com"
 }

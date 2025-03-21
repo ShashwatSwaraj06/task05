@@ -5,15 +5,13 @@ resource "azurerm_windows_web_app" "app" {
   service_plan_id     = var.service_plan_id
 
   site_config {
-    ip_restriction {
-      action     = "Allow"
-      ip_address = var.allow_ip
-      name       = "allow-ip"
-    }
-    ip_restriction {
-      action      = "Allow"
-      service_tag = "AzureTrafficManager"
-      name        = "allow-tm"
+    dynamic "ip_restriction" {
+      for_each = var.ip_restrictions
+      content {
+        action     = ip_restriction.value.action
+        ip_address = ip_restriction.value.ip_address
+        name       = ip_restriction.value.name
+      }
     }
   }
 
