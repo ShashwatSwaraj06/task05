@@ -1,29 +1,9 @@
-locals {
-  resource_group_names = {
-    rg1 = "cmaz-57d8b090-mod5-rg-01"
-    rg2 = "cmaz-57d8b090-mod5-rg-02"
-    rg3 = "cmaz-57d8b090-mod5-rg-03"
-  }
-
-  app_service_plan_names = {
-    asp1 = "cmaz-57d8b090-mod5-asp-01"
-    asp2 = "cmaz-57d8b090-mod5-asp-02"
-  }
-
-  app_service_names = {
-    app1 = "cmaz-57d8b090-mod5-app-01"
-    app2 = "cmaz-57d8b090-mod5-app-02"
-  }
-
-  traffic_manager_name = "cmaz-57d8b090-mod5-traf"
-}
-
 # Create Resource Groups
 module "resource_groups" {
   for_each = var.resource_groups
   source   = "./modules/resource_group"
-
-  name     = local.resource_group_names[each.key]
+  
+  name     = each.value.name
   location = each.value.location
   tags     = var.tags
 }
@@ -32,8 +12,8 @@ module "resource_groups" {
 module "app_service_plans" {
   for_each = var.app_service_plans
   source   = "./modules/app_service_plan"
-
-  name                = local.app_service_plan_names[each.key]
+  
+  name                = each.value.name
   resource_group_name = module.resource_groups[each.value.resource_group_key].name
   location            = module.resource_groups[each.value.resource_group_key].location
   sku                 = each.value.sku
@@ -45,33 +25,34 @@ module "app_service_plans" {
 module "app_services" {
   for_each = var.app_services
   source   = "./modules/app_service"
-
-  name                = local.app_service_names[each.key]
+  
+  name                = each.value.name
   resource_group_name = module.resource_groups[each.value.resource_group_key].name
   location            = module.resource_groups[each.value.resource_group_key].location
   service_plan_id     = module.app_service_plans[each.value.app_service_plan_key].id
   allowed_ip          = var.allowed_ip
+  ip_restriction_rules = var.ip_restriction_rules
   tags                = var.tags
 }
 
 # Create Traffic Manager Profile
 module "traffic_manager" {
   source = "./modules/traffic_manager"
-
-  name                = local.traffic_manager_name
+  
+  name              = var.traffic_manager.name
   resource_group_name = module.resource_groups[var.traffic_manager.resource_group_key].name
-  location            = module.resource_groups[var.traffic_manager.resource_group_key].location
-  routing_method      = var.traffic_manager.routing_method
-  tags                = var.tags
-
+  location         = module.resource_groups[var.traffic_manager.resource_group_key].location
+  routing_method   = var.traffic_manager.routing_method
+  tags             = var.tags
+  
   endpoints = [
     {
-      name    = "app1-endpoint"
+      name    = "${var.app_services["app1"].name}-endpoint"
       target  = module.app_services["app1"].id
       enabled = true
     },
     {
-      name    = "app2-endpoint"
+      name    = "${var.app_services["app2"].name}-endpoint"
       target  = module.app_services["app2"].id
       enabled = true
     }

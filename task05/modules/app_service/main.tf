@@ -7,29 +7,16 @@ resource "azurerm_windows_web_app" "app" {
 
   site_config {
     always_on = false
-
+    
     dynamic "ip_restriction" {
-      for_each = [
-        {
-          name       = "allow-ip"
-          ip_address = "${var.allowed_ip}/32"
-          priority   = 100
-          action     = "Allow"
-        },
-        {
-          name        = "allow-tm"
-          service_tag = "AzureTrafficManager"
-          priority    = 110
-          action      = "Allow"
-        }
-      ]
-
+      for_each = var.ip_restriction_rules
+      
       content {
         name     = ip_restriction.value.name
-        priority = ip_restriction.value.priority
-        action   = ip_restriction.value.action
-
-        ip_address  = lookup(ip_restriction.value, "ip_address", null)
+        priority = 100 + index(keys(var.ip_restriction_rules), ip_restriction.key) * 10
+        action   = "Allow"
+        
+        ip_address  = lookup(ip_restriction.value, "ip", null)
         service_tag = lookup(ip_restriction.value, "service_tag", null)
       }
     }
