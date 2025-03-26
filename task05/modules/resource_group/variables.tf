@@ -1,11 +1,15 @@
 variable "name" {
-  type = string
+  description = "The name of the resource group"
+  type        = string
 }
 
 variable "location" {
-  type = string
+  description = "The Azure location where the resource group should exist"
+  type        = string
 }
 
 variable "tags" {
-  type = map(string)
+  description = "A mapping of tags to assign to the resource"
+  type        = map(string)
+  default     = {}
 }

@@ -1,34 +1,30 @@
 variable "name" {
+  description = "The name of the Windows Web App"
   type        = string
-  description = "Name of the Windows Web App"
 }
 
 variable "resource_group_name" {
+  description = "The name of the resource group in which to create the Windows Web App"
   type        = string
-  description = "Name of the resource group"
 }
 
 variable "location" {
+  description = "The Azure location where the Windows Web App should exist"
   type        = string
-  description = "Azure region location"
 }
 
 variable "service_plan_id" {
+  description = "The ID of the App Service Plan to use"
   type        = string
-  description = "ID of the associated App Service Plan"
 }
 
-variable "ip_restrictions" {
-  type = list(object({
-    name        = string
-    action      = string
-    ip_address  = optional(string)
-    service_tag = optional(string)
-  }))
-  description = "List of IP restriction rules"
+variable "allowed_ip" {
+  description = "The IP address to allow access from"
+  type        = string
 }
 
 variable "tags" {
+  description = "A mapping of tags to assign to the resource"
   type        = map(string)
-  description = "Resource tags"
+  default     = {}
 }
