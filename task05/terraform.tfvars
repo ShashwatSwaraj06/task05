@@ -49,18 +49,18 @@ traffic_manager = {
 
 allowed_ip = "18.153.146.156"
 
-ip_restriction_rules = {
-  allow_ip = {
-    name     = "allow-ip"
-    ip       = "18.153.146.156/32"
-    priority = 100
-  }
-  allow_tm = {
+ip_restriction_rules = [
+  {
+    name       = "allow-ip"
+    priority   = 100
+    ip_address = "18.153.146.156/32"
+  },
+  {
     name        = "allow-tm"
-    service_tag = "AzureTrafficManager"
     priority    = 110
+    service_tag = "AzureTrafficManager"
   }
-}
+]
 
 tags = {
   Creator = "shashwat_swaraj@epam.com"
