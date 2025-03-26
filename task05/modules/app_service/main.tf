@@ -16,8 +16,10 @@ resource "azurerm_windows_web_app" "app" {
         priority = 100 + index(keys(var.ip_restriction_rules), ip_restriction.key) * 10
         action   = "Allow"
 
-        ip_address  = lookup(ip_restriction.value, "ip", null)
-        service_tag = lookup(ip_restriction.value, "service_tag", null)
+        # Only set ip_address if ip is specified
+        ip_address = can(ip_restriction.value.ip) ? ip_restriction.value.ip : null
+        # Only set service_tag if service_tag is specified
+        service_tag = can(ip_restriction.value.service_tag) ? ip_restriction.value.service_tag : null
       }
     }
   }

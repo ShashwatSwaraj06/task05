@@ -52,7 +52,7 @@ allowed_ip = "18.153.146.156"
 ip_restriction_rules = {
   allow_ip = {
     name = "allow-ip"
-    ip   = "18.153.146.156"
+    ip   = "18.153.146.156/32" # Added /32 for single IP
   }
   allow_tm = {
     name        = "allow-tm"
