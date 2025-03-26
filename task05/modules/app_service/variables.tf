@@ -27,6 +27,7 @@ variable "ip_restriction_rules" {
   description = "IP restriction rules configuration"
   type = map(object({
     name        = string
+    priority    = number
     ip          = optional(string)
     service_tag = optional(string)
   }))
