@@ -26,13 +26,13 @@ module "app_services" {
   for_each = var.app_services
   source   = "./modules/app_service"
 
-  name                 = each.value.name
-  resource_group_name  = module.resource_groups[each.value.resource_group_key].name
-  location             = module.resource_groups[each.value.resource_group_key].location
-  service_plan_id      = module.app_service_plans[each.value.app_service_plan_key].id
-  allowed_ip           = var.allowed_ip
+  name                = each.value.name
+  resource_group_name = module.resource_groups[each.value.resource_group_key].name
+  location            = module.resource_groups[each.value.resource_group_key].location
+  service_plan_id     = module.app_service_plans[each.value.app_service_plan_key].id
+  tags                = var.tags
+
   ip_restriction_rules = var.ip_restriction_rules
-  tags                 = var.tags
 }
 
 # Create Traffic Manager Profile

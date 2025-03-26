@@ -6,7 +6,8 @@ resource "azurerm_windows_web_app" "app" {
   tags                = var.tags
 
   site_config {
-    always_on = false
+    always_on                     = false
+    ip_restriction_default_action = "Deny"
 
     dynamic "ip_restriction" {
       for_each = var.ip_restriction_rules
@@ -17,13 +18,6 @@ resource "azurerm_windows_web_app" "app" {
         ip_address  = ip_restriction.value.ip_address
         service_tag = ip_restriction.value.service_tag
       }
-    }
-
-    ip_restriction {
-      name       = "Deny all"
-      priority   = 2147483647
-      action     = "Deny"
-      ip_address = "Any"
     }
   }
 }
