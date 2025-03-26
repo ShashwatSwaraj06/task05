@@ -19,7 +19,7 @@ variable "service_plan_id" {
 }
 
 variable "allowed_ip" {
-  description = "The IP address to allow access from"
+  description = "IP address to allow access"
   type        = string
 }
 
@@ -32,6 +32,7 @@ variable "ip_restriction_rules" {
     service_tag = optional(string)
   }))
 }
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource"
   type        = map(string)

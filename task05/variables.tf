@@ -40,10 +40,11 @@ variable "allowed_ip" {
 }
 
 variable "ip_restriction_rules" {
-  description = "IP restriction rules for App Services"
-  type = map(object({
+  description = "IP restriction rules configuration"
+  type = list(object({
     name        = string
-    ip          = optional(string)
+    priority    = number
+    ip_address  = optional(string)
     service_tag = optional(string)
   }))
 }
