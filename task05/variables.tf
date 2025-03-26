@@ -11,15 +11,15 @@ variable "app_service_plans" {
   type = map(object({
     name               = string
     resource_group_key = string
-    worker_count      = number
-    sku               = string
+    worker_count       = number
+    sku                = string
   }))
 }
 
 variable "app_services" {
   description = "Map of App Services to create"
   type = map(object({
-    name                = string
+    name                 = string
     resource_group_key   = string
     app_service_plan_key = string
   }))
@@ -30,7 +30,7 @@ variable "traffic_manager" {
   type = object({
     name               = string
     resource_group_key = string
-    routing_method    = string
+    routing_method     = string
   })
 }
 
@@ -42,8 +42,8 @@ variable "allowed_ip" {
 variable "ip_restriction_rules" {
   description = "IP restriction rules for App Services"
   type = map(object({
-    name       = string
-    ip         = optional(string)
+    name        = string
+    ip          = optional(string)
     service_tag = optional(string)
   }))
 }

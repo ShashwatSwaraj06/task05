@@ -7,15 +7,15 @@ resource "azurerm_windows_web_app" "app" {
 
   site_config {
     always_on = false
-    
+
     dynamic "ip_restriction" {
       for_each = var.ip_restriction_rules
-      
+
       content {
         name     = ip_restriction.value.name
         priority = 100 + index(keys(var.ip_restriction_rules), ip_restriction.key) * 10
         action   = "Allow"
-        
+
         ip_address  = lookup(ip_restriction.value, "ip", null)
         service_tag = lookup(ip_restriction.value, "service_tag", null)
       }
