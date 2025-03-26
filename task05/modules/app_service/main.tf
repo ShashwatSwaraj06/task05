@@ -11,12 +11,16 @@ resource "azurerm_windows_web_app" "app" {
 
     dynamic "ip_restriction" {
       for_each = var.ip_restriction_rules
+
       content {
-        name        = ip_restriction.value.name
-        priority    = ip_restriction.value.priority
-        action      = "Allow"
-        ip_address  = ip_restriction.value.ip_address
-        service_tag = ip_restriction.value.service_tag
+        name     = ip_restriction.value.name
+        priority = 100 + index(keys(var.ip_restriction_rules), ip_restriction.key) * 10
+        action   = "Allow"
+
+        # Only set ip_address if ip is specified
+        ip_address = can(ip_restriction.value.ip) ? ip_restriction.value.ip : null
+        # Only set service_tag if service_tag is specified
+        service_tag = can(ip_restriction.value.service_tag) ? ip_restriction.value.service_tag : null
       }
     }
   }
